@@ -6,18 +6,16 @@
 </div>
 <div id="user-tweets" style="max-height: 400px; overflow: auto">
     <table class="primary" style="width: 100%">
-        <thead>
+        <tr>
             <th>Tweet</th>
             <th>Link</th>
-        </thead>
-        <tbody>
+        </tr>
         {% for tweet in tweets %}
-            <tr>
-                <td>{{ tweet.text }}</td>
-                <td><a href="https://twitter.com/{{ title }}/status/{{ tweet.id }}">&#128279;</a></td>
-            </tr>
+        <tr>
+            <td>{{ tweet.text }}</td>
+            <td><a href="https://twitter.com/{{ title }}/status/{{ tweet.id }}">&#128279;</a></td>
+        </tr>
         {% endfor %}
-        </tbody>
     </table>
 </div>
 {% endblock %}
