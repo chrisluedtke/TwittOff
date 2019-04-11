@@ -8,6 +8,12 @@ verify_ssl = true
 [packages]
 flask = "*"
 flask-sqlalchemy = "*"
+tweepy = "*"
+basilica = "*"
+python-dotenv = "*"
+jupyter = "*"
+scikit-learn = "*"
+tqdm = "*"
 
 [requires]
-python_version = "3.7"
+python_version = "3.6"

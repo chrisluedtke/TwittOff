@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+{% block content %}
+<p>TwitOff is a machine learning app that predicts the Twitter author of any given text. 
+Choose two twitter users, enter some text, and TwitOff will predict which user is most likely to tweet something similar.</p>
+
+<p>When a new user gets added to the database, the <a href="https://en.wikipedia.org/wiki/Word_embedding">word embeddings</a> of their tweets
+are obtained via <a href="https://www.basilica.ai/">Bascilica</a>. When the comparison is run, a logistic regression determines 
+the most likely author.</p>
+
+<div style="margin-top: 20px; margin-bottom: 20px"><hr></div>
+
+<form action="/compare" method="post">
+    <div class="flex two">
+        <div style="text-align: center"><strong>User 1</strong></div>
+        <div style="text-align: center"><strong>User 2</strong></div>
+        <div class="half" style="max-height: 300px; overflow: auto">
+            {% for user in users %}
+            <label class="stack">
+                <input name="user1" type="radio" value="{{ user.name }}">
+                <span class="button toggle">
+                    {{ user.name }}
+                </span>
+            </label>
+            {% endfor %}
+        </div>
+        <div class="half" style="max-height: 300px; overflow: auto">
+            {% for user in users %}
+            <label class="stack">
+                <input name="user2" type="radio" value="{{ user.name }}">
+                <span class="button toggle">
+                    {{ user.name }}
+                </span>
+            </label>
+            {% endfor %}
+        </div>
+    </div>
+    <textarea type="text" name="tweet_text" placeholder="Tweet text"></textarea>
+    <input type="submit" class="success" value="Predict" style="width: 100%">
+</form>
+<div style="margin-top: 20px; margin-bottom: 20px"><hr></div>
+<div>
+    <div class="flex two">
+        <div>
+            <h2>Manage Users</h2>
+        </div>
+        <div>
+            <label for="modal_1" class="button success" style="margin-top: 18px; float: right;">
+                &#10010; Add
+            </label>
+        </div>
+    </div>
+    <table class="primary" style="width: 100%">
+        <thead>
+            <tr>
+                <th>User</th>
+                <th>View Twitter</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in users %}
+            <tr>
+                <td><a href="/user/{{ user.name }}">{{ user.name }}</a></td>
+                <td><a href="https://twitter.com/{{ user.name }}">&#128279;</a></td>
+                <td></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<script type="text/javascript">
+document.onkeydown = function(e){
+if (e.keyCode == 27) {
+    var mods = document.querySelectorAll('.modal > [type=checkbox]');
+    [].forEach.call(mods, function(mod){ mod.checked = false; });
+    }
+}
+</script>
+
+<div class="modal">
+    <input id="modal_1" type="checkbox" />
+    <label for="modal_1" class="overlay"></label>
+    <article>
+        <form action="/user" method="post">
+        <header>
+            <h3>Add Twitter User</h3>
+            <label for="modal_1" class="close">&times;</label>
+        </header>
+        <section>
+            <input type="text" name="user_name" placeholder="User to add">
+        </section>
+        <footer>
+            <input type="submit" style="width: 100%;" value="Add">
+        </footer>
+        </form>
+    </article>
+</div>
+{% endblock %}
