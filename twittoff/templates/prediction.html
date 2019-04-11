@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block content %}
+<div id="prediction">
+  <h2>{{ title }}</h2>
+  <p><strong>Tweet:</strong> "{{ tweet_text }}"</p>
+</div>
+<div>
+  <table class="primary" style="width: 100%;">
+    <tr>
+      <th>User</th>
+      <th>Likelihood</th>
+    </tr>
+    {% for user_name, likelihood in pre_dict.items() %}
+    <tr>
+      <td>{{ user_name }}</td>
+      <td>{{ likelihood }}%</td>
+    </tr>
+    {% endfor %}
+  </table>
+</div>
+{% endblock %}
