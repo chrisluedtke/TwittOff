@@ -11,9 +11,9 @@ flask-sqlalchemy = "*"
 tweepy = "*"
 basilica = "*"
 python-dotenv = "*"
-jupyter = "*"
 scikit-learn = "*"
-tqdm = "*"
+gunicorn = "*"
+psycopg2 = "*"
 
 [requires]
 python_version = "3.6"
