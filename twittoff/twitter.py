@@ -1,8 +1,9 @@
 """Retrieve Tweets, embeddings, and persist in the database."""
 from os import getenv
-from dotenv import load_dotenv
+
 import basilica
 import tweepy
+
 from .models import DB, Tweet, User
 
 TWITTER_AUTH = tweepy.OAuthHandler(getenv('TWITTER_CONSUMER_KEY'),

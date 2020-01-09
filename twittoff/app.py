@@ -3,8 +3,8 @@ from os import getenv
 
 from dotenv import load_dotenv
 from sqlalchemy import func
-
 from flask import Flask, redirect, render_template, request, url_for
+
 from .models import DB, User
 from .twitter import add_or_update_user, update_all_users
 from .predict import predict_user
